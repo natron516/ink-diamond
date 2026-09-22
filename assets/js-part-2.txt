@@ -1,0 +1,29 @@
+:n.outs)??0,b=(n==null?void 0:n.offense)||{},p=r,h=o.length-1;if(s&&o.length){const d=t.playIndex,l=o[d];i=((G=l==null?void 0:l.result)==null?void 0:G.awayScore)??i,u=((O=l==null?void 0:l.result)==null?void 0:O.homeScore)??u,m=((F=l==null?void 0:l.count)==null?void 0:F.outs)??m,b=vt(l),p=`${((H=l==null?void 0:l.about)==null?void 0:H.halfInning)==="top"?"Top":"Bot"} ${((C=l==null?void 0:l.about)==null?void 0:C.inning)||""} · ${((R=l==null?void 0:l.result)==null?void 0:R.event)||"Play"}`,h=d}const x=(q=a==null?void 0:a.teams)==null?void 0:q.away,P=(_=a==null?void 0:a.teams)==null?void 0:_.home,y={teams:{away:{team:x,score:i},home:{team:P,score:u}},status:{detailedState:r,abstractGameState:(z=a==null?void 0:a.status)==null?void 0:z.abstractGameState}},f=(K=n==null?void 0:n.offense)==null?void 0:K.batter,g=(V=n==null?void 0:n.defense)==null?void 0:V.pitcher,tt=!s&&(f||g)?`<div class="muted">Batter ${c((f==null?void 0:f.fullName)||"—")} · Pitcher ${c((g==null?void 0:g.fullName)||"—")}</div>`:"",et=s?`
+    <div class="controls">
+      <button type="button" data-action="prev">Prev</button>
+      <button type="button" class="primary" data-action="toggle-play">${t.playing?"Pause":"Watch"}</button>
+      <button type="button" data-action="next">Next</button>
+    </div>
+    <div class="row">
+      <input type="range" min="0" max="${Math.max(o.length-1,0)}" value="${t.playIndex}" data-action="scrub" />
+      <span class="muted">${t.playIndex+1}/${o.length||0}</span>
+    </div>`:"",at=o.slice(Math.max(0,h-8),h+1).map((d,l,nt)=>{var W,Y,Z,J;const st=h-(nt.length-1-l)===h,ot=`${((W=d==null?void 0:d.about)==null?void 0:W.halfInning)==="top"?"T":"B"}${((Y=d==null?void 0:d.about)==null?void 0:Y.inning)||""} · ${((Z=d==null?void 0:d.result)==null?void 0:Z.event)||""}`;return`<li class="${st?"current":""}"><strong>${c(ot)}</strong><div>${c(((J=d==null?void 0:d.result)==null?void 0:J.description)||"")}</div></li>`}).join("");S.innerHTML=X(`
+    <button type="button" data-action="back">← Back</button>
+    <section class="panel" style="margin-top:10px">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px">
+        ${U(y)}
+        <span class="muted">${c(p)}</span>
+      </div>
+      <div class="teams">${L("away",y,i)}${L("home",y,u)}</div>
+      <div class="muted">Outs: ${m}</div>
+      ${ut(b)}
+      ${tt}
+      ${mt(e)}
+      ${et}
+    </section>
+    <section class="panel">
+      <h3 style="margin:0 0 8px">Play-by-play</h3>
+      <ul class="pbp">${at||'<li class="muted">No plays yet.</li>'}</ul>
+    </section>
+    ${t.error?`<div class="panel err">${c(t.error)}</div>`:""}
+  `)}function v(){t.mode==="game"?pt():dt()}async function $(){t.loading=!0,t.error="",v();try{t.games=await lt(t.date)}catch(e){t.error=e.message||String(e),t.games=[]}finally{t.loading=!1,v()}}async function ht(e,a){var n,r,s;w(),I(),t.gamePk=e,t.from=a,t.mode="game",t.loading=!0,t.error="",t.feed=null,v();try{t.feed=await Q(e);const o=((s=(r=(n=t.feed)==null?void 0:n.liveData)==null?void 0:r.plays)==null?void 0:s.allPlays)||[];t.playIndex=a==="archive"?0:Math.max(0,o.length-1),a==="live"&&ft()}catch(o){t.error=o.message||String(o)}finally{t.loading=!1,v()}}function I(){t.pollTimer&&(clearInterval(t.pollTimer),t.pollTimer=null)}function ft(){I(),t.pollTimer=setInterval(async()=>{if(!(document.hidden||t.mode!=="game"||t.from!=="live"))try{t.feed=await Q(t.gamePk),t.error="",v()}catch(e){t.error=e.message||String(e),v()}},2e4)}function w(){t.playing=!1,t.playTimer
