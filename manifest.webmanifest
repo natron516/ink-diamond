@@ -1,0 +1,13 @@
+{
+  "name": "Ink Diamond",
+  "short_name": "Ink Diamond",
+  "description": "E-ink arcade scoreboard for live and archived MLB games. Not affiliated with MLB.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1a12",
+  "theme_color": "#0b1a12",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
