@@ -1,0 +1,29 @@
+rchive</button>
+    </nav>
+  </header>
+  ${e}
+  <footer class="footer">Ink Diamond is an unofficial fan project. Not affiliated with Major League Baseball or any club. Scores via the public MLB Stats API.</footer>`}function dt(){const e=t.mode==="archive"?"Archive":"Today’s board",a=t.games,n=a.length?a.map(s=>{var m;const o=s.gamePk,i=((m=s.venue)==null?void 0:m.name)||"",u=s.gameDate?new Date(s.gameDate).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"}):"";return`<button type="button" class="game panel" data-open="${o}">
+          <div class="row" style="justify-content:space-between">${U(s)}<span class="muted">${c(u)}</span></div>
+          <div class="teams">${L("away",s)}${L("home",s)}</div>
+          <div class="muted">${c(i)}</div>
+        </button>`}).join(""):`<div class="panel muted">No games for ${c(t.date)}.</div>`,r=t.mode==="archive"?`<div class="row" style="margin-bottom:12px">
+        <label class="muted" for="arch-date">Date</label>
+        <input id="arch-date" type="date" value="${c(t.date)}" />
+        <button type="button" class="primary" data-action="load-date">Load</button>
+      </div>`:`<div class="row" style="margin-bottom:12px">
+        <span class="muted">MLB date ${c(t.date)} (ET)</span>
+        <button type="button" data-action="refresh">Refresh</button>
+      </div>`;S.innerHTML=X(`
+    <section>
+      <h2 style="margin:0 0 8px;font-size:1.1rem">${e}</h2>
+      ${r}
+      ${t.loading?'<div class="panel muted">Loading…</div>':""}
+      ${t.error?`<div class="panel err">${c(t.error)}</div>`:""}
+      ${n}
+    </section>`)}function ut(e){const a={b1:!!(e!=null&&e.first),b2:!!(e!=null&&e.second),b3:!!(e!=null&&e.third)};return`<div class="diamond" aria-label="Bases">
+    <div class="base b2 ${a.b2?"on":""}"></div>
+    <div class="base b1 ${a.b1?"on":""}"></div>
+    <div class="base b3 ${a.b3?"on":""}"></div>
+    <div class="base home"></div>
+  </div>`}function mt(e){var o;const a=(o=e==null?void 0:e.liveData)==null?void 0:o.linescore;if(!a)return"";const n=a.innings||[],r=n.map(i=>i.num).join("")?n.map(i=>`<th>${i.num}</th>`).join(""):Array.from({length:9},(i,u)=>`<th>${u+1}</th>`).join(""),s=i=>{var p,h,x,P;const u=(n.length?n:Array.from({length:9},()=>({}))).map(y=>{var g;const f=(g=y==null?void 0:y[i])==null?void 0:g.runs;return`<td>${f??""}</td>`}).join(""),m=((p=a.teams)==null?void 0:p[i])||{},b=((P=(x=(h=e==null?void 0:e.gameData)==null?void 0:h.teams)==null?void 0:x[i])==null?void 0:P.abbreviation)||i;return`<tr><td>${c(b)}</td>${u}<td><strong>${m.runs??""}</strong></td><td>${m.hits??""}</td><td>${m.errors??""}</td></tr>`};return`<table class="linescore"><thead><tr><th></th>${r}<th>R</th><th>H</th><th>E</th></tr></thead>
+    <tbody>${s("away")}${s("home")}</tbody></table>`}function vt(e){var n;const a={first:!1,second:!1,third:!1};for(const r of(e==null?void 0:e.runners)||[]){const s=(n=r==null?void 0:r.movement)==null?void 0:n.end;s==="1B"&&(a.first=!0),s==="2B"&&(a.second=!0),s==="3B"&&(a.third=!0)}return a}function pt(){var D,B,M,N,j,k,A,E,G,O,F,H,C,R,q,_,z,K,V;const e=t.feed,a=e==null?void 0:e.gameData,n=(D=e==null?void 0:e.liveData)==null?void 0:D.linescore,r=((B=a==null?void 0:a.status)==null?void 0:B.detailedState)||"",s=t.from==="archive",o=((N=(M=e==null?void 0:e.liveData)==null?void 0:M.plays)==null?void 0:N.allPlays)||[];let i=(k=(j=n==null?void 0:n.teams)==null?void 0:j.away)==null?void 0:k.runs,u=(E=(A=n==null?void 0:n.teams)==null?void 0:A.home)==null?void 0:E.runs,m=(n==null?void 0
